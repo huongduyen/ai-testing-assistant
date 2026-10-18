@@ -1,11 +1,12 @@
-/* eslint-disable prettier/prettier */
 import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
 } from 'typeorm';
+import { Project } from '../../projects/entities/project.entity';
 
 @Entity('users')
 export class User {
@@ -17,6 +18,9 @@ export class User {
 
   @Column({ name: 'password_hash', type: 'varchar', length: 255 })
   passwordHash!: string;
+
+  @OneToMany(() => Project, (project) => project.owner)
+  projects?: Project[];
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt!: Date;
