@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import { DataSource } from 'typeorm';
 import { Project } from '../projects/entities/project.entity';
+import { Requirement } from '../requirements/entities/requirement.entity';
 import { User } from '../users/entities/user.entity';
 
 export default new DataSource({
@@ -11,7 +12,7 @@ export default new DataSource({
   password: process.env.DATABASE_PASSWORD,
   database: process.env.DATABASE_NAME,
 
-  entities: [User, Project],
+  entities: [User, Project, Requirement],
   migrations: [__dirname + '/migrations/*{.ts,.js}'],
   synchronize: false,
 });
