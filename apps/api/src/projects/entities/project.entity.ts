@@ -5,9 +5,11 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   ManyToOne,
+  OneToMany,
   JoinColumn,
   Index,
 } from 'typeorm';
+import { Requirement } from '../../requirements/entities/requirement.entity';
 import { User } from '../../users/entities/user.entity';
 
 @Entity('projects')
@@ -31,6 +33,9 @@ export class Project {
   })
   @JoinColumn({ name: 'owner_id' })
   owner!: User;
+
+  @OneToMany(() => Requirement, (requirement) => requirement.project)
+  requirements?: Requirement[];
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt!: Date;
